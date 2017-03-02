@@ -1,0 +1,133 @@
+body {
+    background-color: #E4E9ED;
+}
+
+hr {
+    border-color: #C0CFCF;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav>li>a{
+    font-weight: 200;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #DDD;
+}
+
+.navbar-inverse .navbar-nav .active a:hover {
+    color: #DDD;
+}
+
+.navbar-brand img {
+    display: block;
+    position: relative;
+    bottom: 13px;
+}
+
+.regButton {
+    margin-top: 14px;
+    margin-left: 12px;
+    margin-right: 10px;
+}
+
+.indexJumbo {
+    background: url('/images/Jumbotron_img.jpg'); 
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    color: white;
+    text-align: center;
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.2),
+				 0px 6px 8px rgba(0,0,0,0.1),
+				 0px 10px 15px rgba(0,0,0,0.1);
+}
+
+.jumbotron .btn-success {
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.4),
+				 0px 6px 13px rgba(0,0,0,0.1),
+				 0px 10px 23px rgba(0,0,0,0.1);
+	margin-top: 30px;
+}
+
+h1.jumboHeader {
+    font-weight: 200;
+	letter-spacing: -.1em;
+	margin: 0;
+	font-size: 8em;
+	text-shadow: 0px 4px 6px rgba(0,0,0,0.4),
+			   0px 8px 12px rgba(0,0,0,0.2),
+			   0px 16px 18px rgba(0,0,0,0.1);
+}
+
+.thumbnail img {
+  width: 100%;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+#indexImg {
+  height: 180px;
+}
+.thumbnail {
+    padding: 0;
+    border: none;
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.2),
+				 0px 6px 8px rgba(0,0,0,0.1),
+				 0px 10px 15px rgba(0,0,0,0.1);
+	background-color: #FCFCFF;
+}
+.thumbnail .caption-full {
+    padding: 10px;
+}
+
+.lead {
+    font-size: 3em;
+    font-weight: 300;
+    letter-spacing: -.1em;
+    color: #555;
+}
+
+.deleteBtn {
+    display: inline;
+    margin-right: 8px;
+    margin-left: 3px;
+}
+
+.list-group-item {
+    background-color: #f5f5f5;
+}
+
+.list-group-item a {
+    color: #555;
+}
+.list-group-item a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.list-group-item:hover {
+    background-color: #EEE;
+}
+
+#map {
+    height: 300px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+#footer {
+    font-size: 7px;
+    position: relative;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    padding-top: 10vh;
+    color: black;
+}
+

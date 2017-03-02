@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>YelpCamp</title>
+        <!--For Facebook Share-->
+        <meta property="og:url"                content="https://qc-webdevbootcamp-earthquang.c9users.io/campgrounds/<%= campground._id %>" />
+        <meta property="og:type"               content="Website" />
+        <meta property="og:title"              content="YelpCamp: <%= campground.name %>" />
+        <meta property="og:description"        content="<%= campground.description %>" />
+        <meta property="og:image"              content="<%= campground.img %>" />
+        
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=206560246487783";
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="/images/icon.png" height="50" width="50"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/campgrounds">Campgrounds</a></li>
+                    </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <% if (currentUser) { %>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logged in as: <%=currentUser.username%><span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">View Profile</a></li>
+                                        <li><a href="/logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                            <% } else { %>
+                                <li><a href="/login">Login</a></li>
+                                <a href="/register"><p class="regButton btn btn-success btn-xs">Sign Up!</p></a>
+                            <% } %>
+                        </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <% if (error && error.length > 0) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
+            <% if (success && success.length > 0) { %>
+                <div class="alert alert-success" role="alert">
+                    <%= success %>
+                </div>
+            <% } %>
+        </div>
+    
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-3">
+                    <p class="lead">Yelp<img src="/images/icon.png" height="36" width="36">Camp</p>
+                    <br>
+                    <div class="list-group">
+                        <a class="list-group-item" href="/campgrounds">View More Campgrounds</a>
+                        <a class="list-group-item fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fqc-webdevbootcamp-earthquang.c9users.io%2Fcampgrounds%2F<%=campground._id%>%2F&amp;src=sdkpreparse">Share Campground</a>
+                        <a class="list-group-item" href="http://www.expedia.com">Book This Campground</a>
+                    </div>
+                    <hr></hr>
+                    <h4>Location:</h4>
+                    <div id="map">
+                        <script>
+                            function initMap() {
+                                var myLat = <%=campLat%>;
+                                var myLng = <%=campLng%>;
+                                var myLatLng = {lat: myLat, lng: myLng};
+                                var map = new google.maps.Map(document.getElementById('map'), {
+                                    zoom: 10,
+                                    center: myLatLng
+                                });
+                                var marker = new google.maps.Marker({
+                                    position: myLatLng,
+                                    map: map,
+                                    title: "Location of <%=campground.name%>"
+                                });
+                            }
+                        </script> 
+                        <br><br>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                    <div class="thumbnail show">
+                        <img class="img-responsive" src="<%= campground.img %>">
+                        <div class="caption-full">
+                            <h4 class="pull-right">$<%=campground.cost%>/night</h4>
+                            <h3 style="margin-top: 5px;"><a href="<%= campground.img %>"> <%= campground.name %> </a></h3>
+                            <h6>
+                                Posted by: <em><%=campground.author.username%></em>
+                            </h6>
+                            <p> <%= campground.description %> </p>
+                            <% if (currentUser && campground.author.id.equals(currentUser._id)) { %>
+                                <div class="text-right">
+                                    <a class="btn btn-xs btn-default" href="/campgrounds/<%=campground._id%>/edit">Edit Camp</a>
+                                    <form class="deleteBtn" action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+                                        <button class="btn btn-xs btn-danger">Delete Camp</button>
+                                    </form>
+                                </div>
+                            <% } %>   
+                        </div>
+                    </div>
+                    <div class="well">
+                        <a class="btn btn-sm btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
+                        <hr/>
+                        <% campground.comments.forEach(function(comment){ %>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong><%= comment.author.username %>:</strong>
+                                    <span class="pull-right"><%= comment["date"].toDateString() %></span>
+                                    <br/>
+                                    <p><%= comment.text %> </p>
+                                    <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                                        <a class="btn btn-xs btn-default" 
+                                            href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">
+                                            Edit Comment
+                                        </a>
+                                        <form class="deleteBtn" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                            <button class="btn btn-xs btn-danger">Delete Comment</button>
+                                        </form>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <br/>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA20AFNyh5TuLKRUHBpIkoe1iYFMbQxaHE&callback=initMap">
+        </script>
+ 
+
+<% include ../partials/footer %>

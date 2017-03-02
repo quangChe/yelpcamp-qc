@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+
+<div class="container"> 
+    <div class="row">
+        <h3 style="text-align: center;">Create a New Campground</h3>
+            <div style="width: 30%; margin: 30px auto;">
+                <form action="/campgrounds" method="POST">
+                    <div class="form-group">
+                        <label>Name: </label>  
+                        <input class="form-control" type="text" name="name" placeholder="Name">
+                    </div> 
+                    <div class="form-group">
+                        <label>Image:</label>
+                        <input class="form-control" type="text" name="image" placeholder="URL">
+                    </div>    
+                    <div class="form-group">
+                        <label>Address:</label>
+                        <input class="form-control" type="text" name="address" placeholder="E.g. 123 Street Name, City Name, MA 00000">
+                    </div>          
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea class="form-control" type="text" name="desc" cols="25" rows="10" placeholder="Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Booking Fee:</label><br/>$
+                        <input class="form-control" style="width: 20%; display: inline;" type="number" min="0.01" step="0.01" value="0.00" name="cost"> /night
+                    </div>          
+                    <div class="form-group">
+                        <button class="btn btn-lg btn-primary btn-block">Post New Campground</button>
+                    </div>
+                </form>
+                <div style="text-align: center; text-decoration: underline;">
+                    <a href="/campgrounds" style="font-size: 11px; text-align: center;">Go Back</a>
+                </div>
+            </div>
+    </div>
+</div>  
+
+<% include ../partials/footer %>
