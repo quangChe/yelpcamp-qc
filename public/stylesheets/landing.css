@@ -105,14 +105,15 @@ body {
   }
 }
 
-#footer {
-    font-size: 7px;
-    color: white;
-    position: relative;
-    bottom: 0;
-    text-align: center;
-    width: 100%;
-    padding-top: 43vh;
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  font-size: .8em;
+  font-weight: 200;
+  color: #DDD;
 }
 
 /* Older browser support - .no-cssanimations class added by modernizr */
