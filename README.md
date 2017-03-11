@@ -11,4 +11,4 @@ YelpCamp was a project that I worked on while taking an online full-stack develo
 
 Setup instructions will be added in the future as I am still planning on making further improvements to this program.
 
-This project is currently up and runnon on [Heroku](pacific-lake-36716.herokuapp.com) using MongoLab as a database host.
+This project is currently up and runnon on [Heroku](https://pacific-lake-36716.herokuapp.com) using MongoLab as a database host.
